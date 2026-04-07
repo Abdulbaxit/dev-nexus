@@ -16,96 +16,85 @@
                 <svg width="32" height="32" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill="currentColor" d="M512 0C229.25 0 0 229.25 0 512c0 226.25 146.688 418.125 350.156 485.812 25.594 4.688 34.938-11.125 34.938-24.625 0-12.188-0.469-52.562-0.719-94.812-142.469 30.969-172.531-60.812-172.531-60.812-23.281-59.156-56.844-74.875-56.844-74.875-46.531-31.75 3.531-31.125 3.531-31.125 51.406 3.562 78.47 52.75 78.47 52.75 45.719 78.312 119.875 55.688 149 42.594 4.594-33.125 17.875-55.688 32.5-68.469-113.75-12.938-233.344-56.875-233.344-253.062 0-55.906 19.969-101.562 52.656-137.406-5.219-13-22.844-65.094 5.062-135.562 0 0 42.938-13.75 140.812 52.5 40.812-11.406 84.594-17.031 128.125-17.219 43.5 0.188 87.312 5.812 128.188 17.219 97.438-66.25 140.375-52.5 140.375-52.5 28 70.469 10.375 122.562 5.125 135.562 32.812 35.844 52.625 81.5 52.625 137.406 0 196.688-119.781 240-233.812 252.688 18.406 15.875 34.75 47.062 34.75 94.75 0 68.438-0.625 123.625-0.625 140.5 0 13.594 9.188 29.562 35.156 24.562C877.562 930 1024 738.125 1024 512 1024 229.25 794.75 0 512 0z"/>
                 </svg>
-                <span>GitUnlocker</span>
+                <span>Dev-Nexus</span>
             </div>
             <nav id="main-nav">
-                <button class="nav-item active">Dashboard</button>
-                <button class="nav-item">Achievements</button>
-                <button class="nav-item">Stats</button>
+                <button class="nav-item active">Overview</button>
+                <button class="nav-item">Tasks</button>
+                <button class="nav-item">Insights</button>
             </nav>
-            <div class="user-profile">
-                <div class="avatar" id="user-avatar" title="Your GitHub Avatar"></div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <div class="user-profile">
+                    <div class="avatar" id="user-avatar" title="Developer Profile"></div>
+                </div>
             </div>
         </header>
 
         <main>
             <section class="welcome-card">
                 <div class="content">
-                    <h1 id="greeting">Unlock Your Potential</h1>
-                    <p>Track your GitHub milestones and collect rare achievement badges.</p>
+                    <h1 id="greeting">Welcome back, Developer.</h1>
+                    <p>Your personal hub for tasks, news, and insights.</p>
                 </div>
                 <div class="action-buttons">
-                    <button id="add-project-btn" class="primary-btn">New Repository</button>
-                    <button class="secondary-btn">View All</button>
+                    <button id="add-task-btn" class="primary-btn">Add Task</button>
+                    <button class="secondary-btn">Sync GitHub</button>
                 </div>
             </section>
 
             <section class="grid-layout">
-                <div class="card status-card">
-                    <h3>Overall Progress</h3>
-                    <div class="progress-circle">
-                        <svg viewBox="0 0 36 36">
-                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path class="circle-progress" stroke-dasharray="65, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        </svg>
-                        <div class="percentage">65%</div>
+                <div class="card task-card">
+                    <div class="card-header">
+                        <h3>Daily Tasks</h3>
+                        <span class="count" id="task-count">0</span>
                     </div>
-                    <div class="stats-mini">
-                        <div class="stat"><span class="label">Repos</span> <span class="value">12</span></div>
-                        <div class="stat"><span class="label">Stars</span> <span class="value">84</span></div>
+                    <div class="task-input-group">
+                        <input type="text" id="new-task" placeholder="Add a new task...">
+                        <button id="add-btn">+</button>
                     </div>
+                    <ul class="task-list" id="task-list">
+                        <!-- Tasks will be added here -->
+                    </ul>
                 </div>
 
-                <div class="card achievements-card">
+                <div class="card news-card">
                     <div class="card-header">
-                        <h3>Unlockable Achievements</h3>
-                        <a href="#">See guides</a>
+                        <h3>Dev News Feed</h3>
+                        <span class="refresh-icon">🔄</span>
                     </div>
-                    <div class="achievement-list">
-                        <div class="achievement-item locked" id="pull-shark">
-                            <div class="icon">🦈</div>
-                            <div class="info">
-                                <strong>Pull Shark</strong>
-                                <span>Merge 2 Pull Requests</span>
-                            </div>
-                        </div>
-                        <div class="achievement-item locked" id="quickdraw">
-                            <div class="icon">⚡</div>
-                            <div class="info">
-                                <strong>Quickdraw</strong>
-                                <span>Close issue within 5 mins</span>
-                            </div>
-                        </div>
-                        <div class="achievement-item locked" id="yolo">
-                            <div class="icon">🚀</div>
-                            <div class="info">
-                                <strong>YOLO</strong>
-                                <span>Merge without review</span>
-                            </div>
-                        </div>
-                        <div class="achievement-item locked" id="pair-extraordinaire">
-                            <div class="icon">👯</div>
-                            <div class="info">
-                                <strong>Pair Extraordinaire</strong>
-                                <span>Co-author a commit</span>
-                            </div>
-                        </div>
+                    <div class="news-list" id="news-feed">
+                        <div class="skeleton-news"></div>
+                        <div class="skeleton-news"></div>
+                        <div class="skeleton-news"></div>
                     </div>
                 </div>
 
                 <div class="card activity-card">
-                    <h3>Recent Repository Activity</h3>
-                    <div class="activity-feed" id="activity-feed">
-                        <!-- Activity items will be loaded here -->
-                        <div class="skeleton"></div>
-                        <div class="skeleton" style="width: 80%"></div>
+                    <div class="card-header">
+                        <h3>Contribution Insights</h3>
+                        <select id="time-range">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                        </select>
+                    </div>
+                    <div class="graph-container">
+                        <div class="mock-graph" id="contribution-graph">
+                            <!-- Mock graph bars will be generated here -->
+                        </div>
+                    </div>
+                    <div class="stats-mini">
+                        <div class="stat"><span class="label">Commits</span> <span class="value">24</span></div>
+                        <div class="stat"><span class="label">PRs</span> <span class="value">8</span></div>
                     </div>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2026 GitUnlocker. Crafted with ✨ for Achievement Hunters.</p>
+            <p>&copy; 2026 Dev-Nexus. Built for the modern developer.</p>
         </footer>
     </div>
 </body>
