@@ -220,3 +220,4 @@ footer {
     .grid-layout { grid-template-columns: 1fr; }
     .welcome-card { flex-direction: column; text-align: center; gap: 24px; }
 }
+@media (max-width: 400px) { .glass-container { padding: 20px; } }
