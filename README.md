@@ -34,4 +34,5 @@ open index.html
 We welcome contributions! Please open an issue first to discuss the changes you'd like to make.
 
 ---
-Built with ❤️ for the developer community.
+
+Built with ❤️ by Abdul Basit for the developer community.
