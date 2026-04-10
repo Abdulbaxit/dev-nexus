@@ -216,8 +216,60 @@ footer {
     font-size: 14px;
 }
 
+/* --- Theme & Animations --- */
+body.light-mode {
+    --background: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border: rgba(0, 0, 0, 0.05);
+    --glass: rgba(0, 0, 0, 0.02);
+}
+
+body {
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.news-item:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    transform: translateX(4px);
+    border-color: var(--primary) !important;
+}
+
+body.light-mode .news-item {
+    background: rgba(0, 0, 0, 0.02) !important;
+}
+
+@keyframes barGrow {
+    to { transform: scaleY(1); }
+}
+
+#theme-toggle {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 18px;
+}
+
+#theme-toggle:hover {
+    background: var(--border);
+    transform: rotate(15deg);
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+}
+
 @media (max-width: 900px) {
     .grid-layout { grid-template-columns: 1fr; }
     .welcome-card { flex-direction: column; text-align: center; gap: 24px; }
 }
 @media (max-width: 400px) { .glass-container { padding: 20px; } }
+
