@@ -29,14 +29,56 @@ document.addEventListener('DOMContentLoaded', () => {
         greeting.innerText = `${timeMsg}, ${name}.`;
     };
 
+    const savedRepos = JSON.parse(localStorage.getItem('gh-repos'));
+    
     // Load saved profile
     const savedProfile = JSON.parse(localStorage.getItem('gh-profile'));
     if (savedProfile) {
         updateGreeting(savedProfile.name || savedProfile.login);
         userAvatar.style.backgroundImage = `url(${savedProfile.avatar_url})`;
         userAvatar.style.backgroundSize = 'cover';
+        if (savedRepos) renderRepos(savedRepos);
     } else {
         updateGreeting();
+    }
+
+    async function fetchTopRepos(username) {
+        try {
+            const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
+            if (!response.ok) return;
+            const repos = await response.json();
+            localStorage.setItem('gh-repos', JSON.stringify(repos));
+            renderRepos(repos);
+        } catch (err) {
+            console.error("Failed to fetch repos", err);
+        }
+    }
+
+    function renderRepos(repos) {
+        const grid = document.getElementById('projects-grid');
+        if (!grid) return;
+
+        grid.innerHTML = repos.map(repo => {
+            const langClass = (repo.language || 'default').toLowerCase();
+            return `
+                <a href="${repo.html_url}" target="_blank" class="repo-card">
+                    <div>
+                        <h4>${repo.name}</h4>
+                        <p>${repo.description || 'No description provided.'}</p>
+                    </div>
+                    <div class="repo-meta">
+                        <div class="lang-badge">
+                            <span class="lang-dot ${langClass}-dot"></span>
+                            <span>${repo.language || 'Unknown'}</span>
+                        </div>
+                        <div class="stars-badge">
+                            <span>⭐</span>
+                            <span>${repo.stargazers_count}</span>
+                        </div>
+                    </div>
+                </a>
+            `;
+        }).join('');
     }
 
     syncBtn.addEventListener('click', async () => {
@@ -45,14 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         syncBtn.innerText = "Syncing...";
         try {
-            const response = await fetch(`https://api.github.com/users/${username}`);
-            if (!response.ok) throw new Error("User not found");
-            const data = await response.json();
+            const profileRes = await fetch(`https://api.github.com/users/${username}`);
+            if (!profileRes.ok) throw new Error("User not found");
+            const data = await profileRes.json();
             
             localStorage.setItem('gh-profile', JSON.stringify(data));
             updateGreeting(data.name || data.login);
             userAvatar.style.backgroundImage = `url(${data.avatar_url})`;
             userAvatar.style.backgroundSize = 'cover';
+
+            // Also fetch repos
+            await fetchTopRepos(username);
+
             syncBtn.innerText = "Synced ✓";
             setTimeout(() => syncBtn.innerText = "Sync GitHub", 2000);
         } catch (err) {
