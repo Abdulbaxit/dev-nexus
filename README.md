@@ -50,4 +50,4 @@ open index.html
 - [ ] Integration with personal portfolio projects via a 'Highlight' card.
 
 ---
-Built with passion for the developer community. If you like this project feel free to give it a ⭐
+Built with passion for the developer community, If you like this project feel free to give it a ⭐
